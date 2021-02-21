@@ -4,15 +4,6 @@
 
 export const environment = {
   production: false,
-  // firebaseConfig: {
-  //   apiKey: 'AIzaSyBjaQe622DN5sWf795I8eDqpWqfF7KWxcI',
-  //   authDomain: 'login-auth-19c59.firebaseapp.com',
-  //   projectId: 'login-auth-19c59',
-  //   storageBucket: 'login-auth-19c59.appspot.com',
-  //   messagingSenderId: '204287577554',
-  //   appId: '1:204287577554:web:9b4aeded177816d74fcc0b',
-  //   measurementId: 'G-G0PLMH2EEM'
-  // }
   firebaseConfig: {
     apiKey: 'AIzaSyC0fpWiMcpQ9rHSM30gsNHDpjl1gQPwPr8',
     authDomain: 'user-registration-d9498.firebaseapp.com',
