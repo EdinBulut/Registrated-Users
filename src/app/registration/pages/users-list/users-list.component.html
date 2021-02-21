@@ -1,0 +1,83 @@
+<div class="container">
+
+  <div class="columns m-2">
+    <div
+      class="column is-6-tablet is-offset-3-tablet is-three-fifths-desktop is-offset-one-fifth-desktop is-4-widescreen is-offset-4-widescreen">
+      <a *ngIf="currentUser" (click)='toUserDetails(currentUser.id)' title="View your profile">
+        <span class="icon"><i class="fa fa-user"></i></span>
+        <span>{{currentUser.firstName + ' ' + currentUser.lastName}}</span>
+      </a>
+      <div class="box mt-3">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" placeholder="Search for user" [(ngModel)]="searchedUser" (keyup)='searchFunction()'>
+            <span class="icon is-small is-left">
+              <i class="fa fa-search"></i>
+            </span>
+          </p>
+        </div>
+
+        <div>
+          <table class="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>Users</th>
+                <th class="is-hidden-mobile"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users  | paginate: config">
+                <td style="padding-left: 0.25rem;">
+                  <div class="vertical-center">
+                    <div>
+                      <div class="vertical-center wrapper mr-2">
+                        <img src="{{user.imageUrl}}" alt="" class="image" (click)='toUserDetails(user.id)'>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="name" (click)='toUserDetails(user.id)'>
+                        <span
+                          innerHTML='{{ user.firstName+" "+user.lastName | highlightText : this.searchedUser }}'></span>
+                      </p>
+                      <p class="email">{{user.email}}</p>
+                    </div>
+
+                  </div>
+                </td>
+                <td class="is-hidden-mobile">
+                  <div class="vertical-center" style="justify-content: flex-end; height: 4rem; text-align: right;"
+                    (click)='toUserDetails(user.id)'>
+                    <a class="icon is-medium" title="View more details"><i class="fa fa-address-card"></i></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-template *ngIf="users" #p="paginationApi" [id]="config.id" [maxSize]="maxSize"
+            style="margin-bottom: 50px;" (pageChange)="config.currentPage = $event">
+            <nav class=" pagination is-small">
+              <div style="display: flex;">
+                <div class="pagination-list" *ngFor="let page of p.pages">
+                  <div class="pagination-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"
+                    [style.border]="page.label === '...' ? 'none' : '1px solid #d9dee2'"
+                    [style.cursor]="page.label === '...' ? 'inherit' : 'pointer'">
+                    {{ page.label }}
+                  </div>
+                  <div *ngIf="p.getCurrent() === page.value" class="pagination-link"
+                    [class.is-current]="p.getCurrent() === page.value">{{ page.label }}</div>
+                </div>
+              </div>
+              <div style="display: flex;">
+                <a class="pagination-previous" [class.disabled]="p.isFirstPage()" [disabled]="p.isFirstPage()"
+                  (click)="p.previous()"><span *ngIf="!p.isFirstPage()">Previous</span></a>
+                <a class="pagination-next" [class.disabled]="p.isLastPage()" (click)="p.next()"
+                  [disabled]="p.isLastPage()"><span *ngIf="!p.isLastPage()">Next</span></a>
+              </div>
+            </nav>
+          </pagination-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

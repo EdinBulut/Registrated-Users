@@ -1,0 +1,133 @@
+@import "~font-awesome/css/font-awesome.css";
+
+img {
+  height: 15px;
+}
+
+div.column.smaller-gap {
+  padding-right: 0.375rem;
+
+  ~.column {
+    padding-left: 0.375rem;
+
+  }
+}
+
+//////////// SELECT ////////////
+.select select:focus,
+.input:focus {
+  border-color: #d9dee2;
+  box-shadow: none;
+}
+
+.select select {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  height: 2.273em
+}
+
+//////////// LABEL ////////////
+.label {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+
+  span {
+    color: #ff722b;
+  }
+}
+
+
+//////////// BUTTON, A ////////////
+
+.button.is-link.is-outlined {
+
+  border-radius: 4px;
+  border-color: whitesmoke;
+  background-color: #d9dee2;
+
+  &:hover {
+    background-color: #7a7a7a;
+  }
+}
+
+a.button.is-static {
+  font-size: 0.75rem;
+  border-radius: 4px 0 0 4px;
+}
+
+a {
+  font-size: 0.75rem;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+
+//////////// FORM ////////////
+article.message {
+  margin-bottom: 0;
+
+  .message-header {
+    background-color: whitesmoke;
+    border: .8px solid#dfe6e9;
+    height: 65px;
+    align-items: center;
+
+    ul {
+      list-style: circle;
+      padding-left: 1.25rem;
+    }
+
+  }
+
+  .message-body {
+    min-height: 50px;
+    background-color: #dbdbdb;
+    padding: 0.75rem;
+
+    .help.is-danger {
+      line-height: 1.25;
+    }
+  }
+}
+
+.column p.qstn {
+  a {
+    text-decoration: none;
+  }
+  color: #ff722b;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+
+@media all and (max-width:768px) {
+  .container.main {
+    width: 400px;
+  }
+}
+
+@media all and (max-width:650px) {
+
+  button.button {
+    font-size: 1rem !important;
+  }
+
+  a {
+    font-size: 0.75rem;
+  }
+
+  .option p {
+    font-size: 0.85rem;
+  }
+
+}
+

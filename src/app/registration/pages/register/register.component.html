@@ -1,0 +1,294 @@
+<div class="main container">
+  <article class="message">
+    <form #userForm="ngForm" novalidate (ngSubmit)='onSignIn()'>
+      <div class="message-header">
+      </div>
+      <div class="message-body">
+        <div class="columns is-tablet">
+          <div class="column">
+            <div class="columns is-mobile is-paddingless mb-0">
+              <div class="column is-6 smaller-gap">
+                <div class="field">
+                  <label class="label is-small">First Name <span>*</span></label>
+                  <div class="control has-icons-right">
+                    <input class="input is-small" type="text" required name="firstName" [(ngModel)]="userInfo.firstName"
+                      #firstName=ngModel [class.is-danger]="firstName.invalid && firstName.touched" minlength="2"
+                      maxlength="20" [class.is-primary]="firstName.valid && firstName.touched"
+                      pattern="[A-Z][a-zšđčćžA-ZŠĐČĆŽ]{0,19}$">
+                    <ng-container *ngIf="firstName.invalid && firstName.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="firstName.errors.required">First name is required.</p>
+                      <p class="help is-danger" *ngIf="firstName.errors.minlength">First name must have at least 2
+                        letters.</p>
+                      <p class="help is-danger" *ngIf="firstName.errors.pattern">First letter must be in uppercase.
+                        <br>
+                        Please enter only letters.</p>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="column ">
+                <div class="field">
+                  <label class="label is-small">Last Name <span>*</span></label>
+                  <div class="control has-icons-right">
+                    <input class="input is-small" type="text" required name="lastName" [(ngModel)]="userInfo.lastName"
+                      #lastName=ngModel [class.is-danger]="lastName.invalid && lastName.touched" minlength="2"
+                      maxlength="20" [class.is-primary]="lastName.valid && lastName.touched"
+                      pattern="[A-Z][a-zšđčćžA-ZŠĐČĆŽ]{0,19}$">
+                    <ng-container *ngIf="lastName.invalid && lastName.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="lastName.errors.required">Last name is required.</p>
+                      <p class="help is-danger" *ngIf="lastName.errors.minlength">Last name must have at least 2
+                        letters.</p>
+                      <p class="help is-danger" *ngIf="lastName.errors.pattern">First letter must be in uppercase.
+                        <br>Please enter only letters.</p>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field ">
+              <label class="label is-small">Company</label>
+              <div class="control has-icons-left ">
+                <input class="input is-small" type="text" name="company" [(ngModel)]="userInfo.company"
+                  #company=ngModel>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-briefcase"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field ">
+              <label class="label is-small">Email <span>*</span></label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-small" type="text" placeholder="" required name="email"
+                  [(ngModel)]="userInfo.email" #email=ngModel
+                  [class.is-danger]="(email.invalid && email.touched) || this.errorMessage"
+                  [class.is-primary]="email.valid && email.touched" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  (keyup)='this.errorMessage = null'>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+                <ng-container *ngIf="email.invalid && email.touched">
+                  <span class="icon is-small is-right">
+                    <i class="fa fa-exclamation-triangle"></i>
+                  </span>
+                  <p class="help is-danger" *ngIf="email.errors.required">Email is required.</p>
+                  <p class="help is-danger" *ngIf="email.errors.pattern">Email is not valid.</p>
+                </ng-container>
+                <p class="help is-danger">{{this.errorMessage}}</p>
+              </div>
+            </div>
+            <div class="columns is-mobile mb-0">
+              <div class="column smaller-gap">
+                <div class="field ">
+                  <label class="label is-small">Password <span>*</span></label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input is-small" type="password" placeholder="" name="password"
+                      [(ngModel)]="userInfo.password" required #password=ngModel
+                      [class.is-danger]="password.invalid && password.touched"
+                      [class.is-primary]="password.valid && password.touched" pattern="^(?=.*?[A-Z])(?=.*?[0-9]).{6,}$">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                    <ng-container *ngIf="password.invalid && password.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="password.errors.required">Please enter your
+                        password.</p>
+                      <p class="help is-danger" *ngIf="password.errors.pattern">
+                        Password must have at least 6 characters. <br>
+                        Use at least 1 capital letter and at least 1 number.
+                      </p>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-6">
+                <div class="field ">
+                  <label class="label is-small">Confirm Password <span>*</span></label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input is-small" type="password" placeholder="" name="confirmPassword"
+                      [(ngModel)]="userInfo.confirmPassword" required #confirmPassword=ngModel
+                      [class.is-danger]="(confirmPassword.invalid || confirmPassword.value !== password.value) && confirmPassword.touched"
+                      [class.is-primary]="(confirmPassword.valid || confirmPassword.value === password.value) && confirmPassword.touched"
+                      pattern="^(?=.*?[A-Z])(?=.*?[0-9]).{6,}$">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                    <ng-container *ngIf="confirmPassword.invalid && confirmPassword.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="confirmPassword.errors.required">Please confirm your password.
+                      </p>
+                    </ng-container>
+                    <ng-container *ngIf="(confirmPassword.value !== password.value) && confirmPassword.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger"
+                        *ngIf="(confirmPassword.value !== password.value) && confirmPassword.value.length>0">
+                        Please make sure your passwords match.
+                      </p>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label class="label is-small">Country <span>*</span></label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-small" [class.is-danger]="country.invalid && country.touched"
+                  [class.is-primary]="country.valid && country.touched">
+                  <select [(ngModel)]="userInfo.address.country" name="country" #country='ngModel'
+                    style="padding-left: 2.9em; height: 2.5em;" (change)=onCountryChange(country.value)>
+                    <option *ngFor="let country of countries" value="{{ country.name.common }}">
+                      {{ country.name.common }} ({{ country.flag}})
+                    </option>
+                  </select>
+                </div>
+                <span class="icon is-small is-left" style="padding-left: 5px;"
+                  [style.color]="(country.invalid && country.touched) ? '#f0ad4e' : '#d9dee2' ">
+                  <img src="{{userInfo.address.flag}}">
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label is-small">State/Region/Province <span>*</span></label>
+              <div class="control has-icons-right">
+                <input class="input is-small" type="text" required name="state" [(ngModel)]="userInfo.address.state"
+                  #state=ngModel [class.is-danger]="state.invalid && state.touched"
+                  [class.is-primary]="state.valid && state.touched" pattern="[A-Z][a-zA-Z ]{0,29}$" minlength="2"
+                  maxlength="30">
+                <ng-container *ngIf="state.invalid && state.touched">
+                  <span class="icon is-small is-right">
+                    <i class="fa fa-exclamation-triangle"></i>
+                  </span>
+                  <p class="help is-danger" *ngIf="state.errors.required">State or region or province is required.</p>
+                  <p class="help is-danger" *ngIf="state.errors.minlength">State or region or province must have at
+                    least 2 letters.</p>
+                  <p class="help is-danger" *ngIf="state.errors.pattern">First letter must be in uppercase. <br>Please
+                    enter only letters.</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="columns is-mobile is-paddingless mb-0">
+              <div class="column is-5 smaller-gap">
+
+                <div class="field">
+                  <label class="label is-small">Zip/Postal Code <span>*</span></label>
+                  <div class="control has-icons-right">
+                    <input class="input is-small" type="text" required name="zip" [(ngModel)]="userInfo.address.zip"
+                      style="text-align: center;" #zip=ngModel [class.is-danger]="zip.invalid && zip.touched"
+                      [class.is-primary]="zip.valid && zip.touched" pattern="[0-9]{3,8}$" maxlength="8">
+                    <ng-container *ngIf="zip.invalid && zip.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="zip.errors.required">Zip/postal code is required.
+                      </p>
+                      <p class="help is-danger" *ngIf="zip.errors.pattern">Please enter valid zip/postal
+                        code.</p>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+
+                <div class="field">
+                  <label class="label is-small">City <span>*</span></label>
+                  <div class="control has-icons-right">
+                    <input class="input is-small" type="text" required name="city" [(ngModel)]="userInfo.address.city"
+                      #city=ngModel [class.is-danger]="city.invalid && city.touched" #cityName
+                      [class.is-primary]="city.valid && city.touched" pattern="[A-Z][a-zA-Z .-]{0,19}$" minlength="2"
+                      maxlength="20">
+                    <ng-container *ngIf="city.invalid && city.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                    </ng-container>
+                  </div>
+                  <div *ngIf="city.invalid && city.touched" >
+                    <p class="help is-danger" *ngIf="city.errors.required">City name is required.</p>
+                    <p class="help is-danger" *ngIf="city.errors.minlength">City name must have at least 2
+                      letters.</p>
+                    <p class="help is-danger" *ngIf="city.errors.pattern">First letter must be in uppercase.
+                      <br>
+                      Please enter only letters.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label is-small">Street <span>*</span></label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-small" type="text" placeholder="" name="street"
+                  [(ngModel)]="userInfo.address.street" required #street=ngModel
+                  [class.is-danger]="street.invalid && street.touched"
+                  [class.is-primary]="street.valid && street.touched" maxlength="60"
+                  pattern="([A-Za-z0-9 .-]).{4,60}$">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-map-marker"></i>
+                </span>
+                <ng-container *ngIf="street.invalid && street.touched">
+                  <span class="icon is-small is-right">
+                    <i class="fa fa-exclamation-triangle"></i>
+                  </span>
+                  <p class="help is-danger" *ngIf="street.errors.required">Please enter your
+                    street name.</p>
+                  <p class="help is-danger" *ngIf="street.errors.pattern">
+                    Please enter valid street name.
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label is-small">Phone Number <span>*</span></label>
+              <div class="field-body">
+                <div class="field is-expanded">
+                  <div class="field has-addons">
+                    <div class="control"><a class="button is-static">{{dialNumber}}</a></div>
+                    <div class="control has-icons-right is-expanded">
+                      <input class="input is-small" type="text" required name="phone" [(ngModel)]="userInfo.phone "
+                        #phone=ngModel [class.is-danger]="phone.invalid && phone.touched"
+                        [class.is-primary]="phone.valid && phone.touched" pattern="[0-9 \)\(+.-]{7,20}$">
+                      <ng-container *ngIf="phone.invalid && phone.touched">
+                        <span class="icon is-small is-right">
+                          <i class="fa fa-exclamation-triangle"></i>
+                        </span>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="phone.invalid && phone.touched" style="margin-top: -3%;">
+              <p class="help is-danger" *ngIf="phone.errors.required">Please enter your phone number.</p>
+              <p class="help is-danger" *ngIf="phone.errors.pattern">Please enter valid phone number. </p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button is-outlined is-link is-medium is-fullwidth">
+          <span>Register</span>
+        </button>
+      </div>
+      <div class="column switch">
+        <p class="qstn">
+          <a routerLink="/login">Already have an account?</a>
+        </p>
+      </div>
+    </form>
+  </article>
+</div>

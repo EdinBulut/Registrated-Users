@@ -1,0 +1,80 @@
+.vertical-center {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  border: 2px solid rgb(202, 195, 185);
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  img:hover {
+    transition: transform .5s ease-in-out;
+    transform: scale(1.1);
+  }
+}
+
+.table .icon {
+  visibility: hidden;
+}
+
+table tr:hover {
+
+  .icon {
+    visibility: visible;
+
+    &:hover {
+      color: #3498db;
+      opacity: 1;
+    }
+  }
+}
+
+.name {
+  cursor: pointer;
+
+  &:hover {
+    color: #3498db;
+    font-weight: 450;
+  }
+}
+
+.email {
+  font-size: 0.75rem; 
+  opacity: 0.9;
+}
+
+tbody tr {
+  &:hover {
+    background-color: whitesmoke !important;
+  }
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.pagination {
+  justify-content: space-between;
+}
+
+.pagination-link.is-current {
+  border-color: #dbdbdb;
+  background-color: #dbdbdb;
+}
+
+@media (min-width:1220px) and (max-width:1410px){
+  .pagination {
+    flex-direction: column;
+  }
+}
+@media (max-width:860px){
+  .pagination {
+    flex-direction: column;
+  }
+}

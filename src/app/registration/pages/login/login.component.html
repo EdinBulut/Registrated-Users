@@ -1,0 +1,76 @@
+<div class="main container">
+  <article class="message">
+    <form #userForm="ngForm" novalidate (ngSubmit)='onLogin()'>
+      <div class="message-header">
+        <span class="subtitle is-7 has-text-grey-light">
+          <strong>Already registered?</strong> <br>Please log in below.
+        </span>
+      </div>
+      <div class="message-body">
+        <div class="columns is-tablet">
+          <div class="column">
+
+            <div class="field ">
+              <label class="label is-small">Email <span>*</span></label>
+              <div class="control has-icons-left has-icons-right half-width">
+                <input class="input is-small" type="text" placeholder="" required name="email"
+                  [(ngModel)]="userInfo.email" #email=ngModel
+                  [class.is-danger]="(email.invalid && email.touched) || this.errorMessage"
+                  [class.is-primary]="email.valid && email.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+                <ng-container *ngIf="email.invalid && email.touched">
+                  <span class="icon is-small is-right">
+                    <i class="fa fa-exclamation-triangle"></i>
+                  </span>
+                  <p class="help is-danger" *ngIf="email.errors.required">Email is required.</p>
+                  <p class="help is-danger" *ngIf="email.errors.pattern">Email is not valid.</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="columns is-mobile mb-0">
+              <div class="column">
+                <div class="field ">
+                  <label class="label is-small">Password <span>*</span></label>
+                  <div class="control has-icons-left has-icons-right half-width">
+                    <input class="input is-small" type="password" placeholder="" name="password"
+                      [(ngModel)]="userInfo.password" required #password=ngModel
+                      [class.is-danger]="(password.invalid && password.touched) || this.errorMessage"
+                      [class.is-primary]="password.valid && password.touched" pattern="^(?=.*?[A-Z])(?=.*?[0-9]).{6,}$"
+                      (keyup)='this.errorMessage = null'>
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                    <ng-container *ngIf="password.invalid && password.touched">
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-exclamation-triangle"></i>
+                      </span>
+                      <p class="help is-danger" *ngIf="password.errors.required">Please enter your
+                        password.</p>
+                      <p class="help is-danger" *ngIf="password.errors.pattern">
+                        Password must have at least 6 characters. <br>
+                        Use at least 1 capital letter and at least 1 number.
+                      </p>
+                    </ng-container>
+                    <p class="help is-danger" style="margin-top: 1rem;">{{this.errorMessage}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="button is-outlined is-link is-medium is-fullwidth">
+
+          <span>Login</span>
+        </button>
+      </div>
+      <div class="column switch">
+        <p class="qstn">
+          <a routerLink="/register">Don't have an account? </a>
+        </p>
+      </div>
+    </form>
+  </article>
+</div>

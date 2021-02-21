@@ -1,0 +1,52 @@
+<div class="container" *ngIf="user">
+
+  <div class="columns m-2">
+    <div class="column is-8-tablet is-offset-2-tablet is-three-fifths-desktop is-offset-one-fifth-desktop">
+
+      <button class="button is-light mb-5" [routerLink]="['/users']">
+        <span class="icon">
+          <i class="fa fa-chevron-left"></i>
+        </span><span style="margin-bottom: 0.1rem;">Back</span>
+      </button>
+
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left mb-5">
+              <figure class="image">
+                <img src="{{user.imageUrl}}">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="subtitle is-3">{{user.firstName}} {{user.lastName}}</p>
+
+              <div class='part'>
+                <p>email:</p>
+                <p>{{user.email}}</p>
+              </div>
+              <div class='part'>
+                <p>phone:</p>
+                <p>{{user.phone}}</p>
+              </div>
+              <div class='part'>
+                <p>company:</p>
+                <p *ngIf="user.company !== ''; else noCompany">{{user.company}}</p>
+                <ng-template #noCompany>
+                  <p style="text-indent: 2rem;">/</p>
+                </ng-template>
+              </div>
+              <div class='part'>
+                <p>address:</p>
+                <p>{{user.address.country}},</p>
+                <p>{{user.address.state}},</p>
+                <p>{{user.address.zip}} {{user.address.city}},</p>
+                <p>{{user.address.street}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

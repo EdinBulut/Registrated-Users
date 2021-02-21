@@ -1,0 +1,53 @@
+<div class="navbar is-light ">
+  <div class="container">
+    <div class="navbar-start ml-3">
+      <a class="navbar-item" routerLink='/users'>
+        <img src="assets/images/avatar.png" class="logo mr-1">
+        <h1 class="title is-4">Users</h1>
+      </a>
+    </div>
+    <div class="navbar-end" >
+      <button class="button is-dark is-outlined mr-2" 
+      *ngIf="router.url.indexOf('/users') > -1" (click)='onLogOut()'>Log Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="main container" *ngIf="router.url === '/login' || router.url === '/register'">
+    <div class="columns is-mobile">
+      <div class="column is-paddingless">
+        <div class="option">
+          <p>Register</p>
+          <button class="circle" routerLink='/register' [class.selected]="router.url === '/register'"></button>
+        </div>
+      </div>
+      <div class="column is-paddingless">
+        <div class="option">
+          <p>Login</p>
+          <button class="circle" routerLink="/login" [class.selected]="router.url === '/login'"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+
+
+<router-outlet></router-outlet>
+</div> -->
