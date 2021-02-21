@@ -55,7 +55,7 @@
           </table>
           <pagination-template *ngIf="users" #p="paginationApi" [id]="config.id" [maxSize]="maxSize"
             style="margin-bottom: 50px;" (pageChange)="config.currentPage = $event">
-            <nav class=" pagination is-small">
+            <nav class=" pagination is-small" *ngIf="this.users.length >= 5">
               <div style="display: flex;">
                 <div class="pagination-list" *ngFor="let page of p.pages">
                   <div class="pagination-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"
@@ -67,7 +67,7 @@
                     [class.is-current]="p.getCurrent() === page.value">{{ page.label }}</div>
                 </div>
               </div>
-              <div style="display: flex;">
+              <div style="display: flex;" >
                 <a class="pagination-previous" [class.disabled]="p.isFirstPage()" [disabled]="p.isFirstPage()"
                   (click)="p.previous()"><span *ngIf="!p.isFirstPage()">Previous</span></a>
                 <a class="pagination-next" [class.disabled]="p.isLastPage()" (click)="p.next()"
