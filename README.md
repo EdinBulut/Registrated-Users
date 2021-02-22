@@ -1,6 +1,29 @@
-# Registrated Users
+# Registrated Users (https://user-registration-d9498.web.app)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
+## About app
+
+Angular + Firebase project
+
+When the app loads, you are on the register page.
+You can register or if you already have an account you can log in.
+
+When registration is successfully done you are redirected to list of users page.
+You can't navigate to list of users page if you are not logged in and if you try to do that you will be redirected to login page.
+Also if you are logged in, you are not able to navigate to login or register screen.
+
+On list of users page the search field is live and react to any change in the input field.
+When the search is performed, results appear under the search box.
+
+When you click on a specific user you are taken to user details page where you can find more info about that user.
+The Back button returns you back to list of users.
+
+If you navigate to page that doesn't exist 'Page not found' will be shown.
+
+Project is deployed to Firebase: https://user-registration-d9498.web.app
+
+
+
+
 
 ## Development server
 
