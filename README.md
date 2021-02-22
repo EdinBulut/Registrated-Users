@@ -2,7 +2,7 @@
 
 ## About app
 
-Angular + Firebase project
+Angular + Firebase project.
 Bulma - CSS library
 
 When the app loads, you are on the register page.
