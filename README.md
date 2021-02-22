@@ -3,9 +3,10 @@
 ## About app
 
 Angular + Firebase project
+Bulma - CSS library
 
 When the app loads, you are on the register page.
-You can register or if you already have an account you can log in.
+You need to register or if you already have an account you can log in.
 
 When registration is successfully done you are redirected to list of users page.
 You can't navigate to list of users page if you are not logged in and if you try to do that you will be redirected to login page.
